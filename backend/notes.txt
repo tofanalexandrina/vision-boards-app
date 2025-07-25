@@ -1,0 +1,6 @@
+express: Web server
+mongoose: MongoDB object modeling
+cors: Allow frontend to connect to API
+dotenv: Manage environment variables
+
+server.js is created and set up by me
