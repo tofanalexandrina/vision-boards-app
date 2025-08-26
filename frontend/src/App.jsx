@@ -1,11 +1,22 @@
-import { useState } from 'react'
-import './App.css'
+import SplashScreen from './components/SplashScreen.jsx';
+import Homepage from './pages/Homepage.jsx';
+import { useState, useEffect } from 'react';
 
 function App() {
 
+  const [showSplash, setShowSplash]=useState(true);
+
+  useEffect(()=>{
+    const timer=setTimeout(()=>{
+      setShowSplash(false);
+    }, 2000);
+
+    return ()=>clearTimeout(timer);
+  }, [])
+
   return (
     <>
-      <h1>Welcome to Envision</h1>
+    {showSplash?<SplashScreen/>:<Homepage/>}
     </>
   )
 }
