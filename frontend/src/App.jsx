@@ -1,6 +1,10 @@
 import SplashScreen from './components/SplashScreen.jsx';
 import Homepage from './pages/Homepage.jsx';
+import Boards from './pages/Boards.jsx';
 import { useState, useEffect } from 'react';
+import Layout from './layout/Layout.jsx';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+
 
 function App() {
 
@@ -14,10 +18,19 @@ function App() {
     return ()=>clearTimeout(timer);
   }, [])
 
+  if(showSplash){
+    return <SplashScreen/>;
+  }
+
   return (
-    <>
-    {showSplash?<SplashScreen/>:<Homepage/>}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Homepage/>}/>
+          <Route path="/boards" element={<Boards/>}/>
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 
