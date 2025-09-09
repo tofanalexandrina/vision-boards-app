@@ -7,4 +7,4 @@ const BoardSchema=new mongoose.Schema({
     userId:{type: String, ref: 'User', required: true}
 });
 
-module.exports=mongoose.model('Board', BoardSchema);
+export default mongoose.model('Board', BoardSchema);

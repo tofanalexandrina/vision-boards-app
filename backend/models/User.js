@@ -8,4 +8,4 @@ const UserSchema=new mongoose.Schema({
     userProfilePicture:{type: String}
 });
 
-module.exports=mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

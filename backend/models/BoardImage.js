@@ -6,4 +6,4 @@ const BoardImageSchema=new mongoose.Schema({
     imageId:{type: String, ref: 'Image', required: true}
 });
 
-module.exports=mongoose.model('BoardImage', BoardImageSchema);
+export default mongoose.model('BoardImage', BoardImageSchema);

@@ -8,4 +8,4 @@ const ImageSchema=new mongoose.Schema({
     userId:{type: String, ref: 'User'}
 });
 
-module.exports=mongoose.model('Image', ImageSchema);
+export default mongoose.model('Image', ImageSchema);

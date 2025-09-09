@@ -4,6 +4,8 @@ import Boards from './pages/Boards.jsx';
 import { useState, useEffect } from 'react';
 import Layout from './layout/Layout.jsx';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
 
 
 function App() {
@@ -25,6 +27,9 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+
         <Route path="/" element={<Layout/>}>
           <Route index element={<Homepage/>}/>
           <Route path="/boards" element={<Boards/>}/>
