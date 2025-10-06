@@ -1,13 +1,47 @@
-const Modal=({isOpen, onClose, children})=>{
-    if(!isOpen) return null;
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
 
-    return(
-        <div onClick={onClose} style={{position: "fixed", top: 0, left: 0, width: "100%", height: "100%", display: "flex", background: "rgba(0, 0, 0, 0.5)", alignItems: "center", justifyContent: "center"}}>
-            <div style={{background: "white", height: 150, width: 240, margin: "auto", padding: "2%", border: "2px", borderRadius: "10px", boxShadow: "2px solid black"}}>
-                {children}
-            </div>
-        </div>
-    )
-}
+  const handleContainerClick = (e) => {
+    if (e.target === e.currentTarget) {
+      //only close if clicking background, not modal
+      onClose();
+    }
+  };
+
+  return (
+    <div
+      onClick={handleContainerClick}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        background: "rgba(0, 0, 0, 0.5)",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex:1000
+      }}
+    >
+      <div
+        onClick={(e)=>e.stopPropagation()}
+        style={{
+          background: "white",
+          minWidth: 280,
+          minHeight: 200,
+          maxWidth: "90%",
+          margin: "auto",
+          padding: 0,
+          border: "1px solid black",
+          boxShadow: "2px solid black",
+          position: "relative"
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export default Modal;
