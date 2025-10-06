@@ -1,27 +1,54 @@
-import React from 'react';
-import Modal from '../components/Modal';
+import React, { useState } from "react";
+import { mockPhotos } from "../data/mockPhotos.js";
 
 const Homepage = () => {
-    const [open, setOpen]=React.useState(false);
-    
-    const handleClose=()=>{
-        setOpen(false);
-    }
+  const [photos, setPhotos] = useState(mockPhotos);
 
-    const handleOpen=()=>{
-        setOpen(true);
-    }
-
-    return (
-        <div className='homepage' style={{textAlign: "center", margin: "auto", width: "50%", padding: "10px"}}>
-            <button style={{margin: "auto", width: "50px", height: "50px", backgroundColor: "white", borderRadius: "50%", cursor: "pointer", position: "fixed", bottom:"30px", left:"50%", transform:"translateX(-50%)"}} onClick={handleOpen}><img src="https://www.iconpacks.net/icons/2/free-plus-icon-3107-thumb.png" style={{width: "70%", height: "60%"}}/></button>
-            <Modal isOpen={open} onClose={handleClose}>
-                <>
-                    <p>This is my modal </p>
-                </>
-            </Modal>
-        </div>
-    )
-}
+  return (
+    <div
+      className="homepage"
+      style={{
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "10px",
+          width: "90%",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        {photos.map((photo) => (
+          <div
+            key={photo.id}
+            style={{
+              backgroundColor: "#eee",
+              border: "1px solid black",
+              aspectRatio: "1/1",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={photo.imageUrl}
+              alt={photo.name}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Homepage;
