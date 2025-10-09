@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
 import { mockBoards } from "../data/mockBoards.js";
+import BoardCard from "../components/BoardCard.jsx";
 
 const Boards = () => {
   const [open, setOpen] = useState(false);
@@ -32,27 +33,7 @@ const Boards = () => {
         }}
       >
         {boards.map((board) => (
-          <div
-            key={board.boardId}
-            style={{
-              backgroundColor: "white",
-              border: "1px solid black",
-              padding: "30px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <div
-              style={{
-                width: "100px",
-                height: "100px",
-                backgroundColor: "#eee",
-                marginBottom: "10px",
-              }}
-            ></div>
-            <p style={{ margin: 0, fontWeight: "bold" }}>{board.boardName}</p>
-          </div>
+          <BoardCard key={board.boardId} board={board}></BoardCard>
         ))}
       </div>
       <button

@@ -25,7 +25,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       }}
     >
       <div
-        onClick={(e)=>e.stopPropagation()}
+        onClick={handleContainerClick}
         style={{
           background: "white",
           minWidth: 280,
