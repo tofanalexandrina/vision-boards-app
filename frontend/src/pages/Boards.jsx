@@ -2,17 +2,82 @@ import React, { useState } from "react";
 import Modal from "../components/Modal";
 import { mockBoards } from "../data/mockBoards.js";
 import BoardCard from "../components/BoardCard.jsx";
+import UploadPictureForm from "../components/UploadPictureForm.jsx";
+import CreateBoardForm from "../components/CreateBoardForm.jsx";
 
 const Boards = () => {
   const [open, setOpen] = useState(false);
   const [boards, setBoards] = useState(mockBoards);
+  const [modalContent, setModalContent] = useState("menu");
 
   const handleClose = () => {
     setOpen(false);
+    setTimeout(() => setModalContent("menu"), 300);
   };
 
   const handleOpen = () => {
     setOpen(true);
+    setModalContent("menu");
+  };
+
+  const handleUploadClick = () => {
+    setModalContent("upload");
+  };
+
+  const handleCreateBoardClick = () => {
+    setModalContent("create");
+  };
+
+  const renderModalContent = () => {
+    switch (modalContent) {
+      case "upload":
+        return (
+          <UploadPictureForm
+            onClose={handleClose}
+            boards={boards}
+          ></UploadPictureForm>
+        );
+      case "create":
+        return <CreateBoardForm onClose={handleClose}></CreateBoardForm>;
+      default:
+        return (
+          <div style={{ padding: "20px", textAlign: "center" }}>
+            <h3 style={{ marginBottom: "20px", whiteSpace: "nowrap" }}>
+              What would you like to do?
+            </h3>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
+              <button
+                onClick={handleUploadClick}
+                style={{
+                  padding: "12px 20px",
+                  backgroundColor: "white",
+                  border: "1px solid black",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  fontSize: "16px",
+                }}
+              >
+                Upload Picture
+              </button>
+              <button
+                onClick={handleCreateBoardClick}
+                style={{
+                  padding: "12px 20px",
+                  backgroundColor: "white",
+                  border: "1px solid black",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  fontSize: "16px",
+                }}
+              >
+                Create Board
+              </button>
+            </div>
+          </div>
+        );
+    }
   };
 
   return (
@@ -57,39 +122,7 @@ const Boards = () => {
         <span style={{ fontSize: "24px", lineHeight: 1 }}>+</span>
       </button>
       <Modal isOpen={open} onClose={handleClose}>
-        <div style={{ padding: "20px", textAlign: "center" }}>
-          <h3 style={{ marginBottom: "20px", whiteSpace: "nowrap" }}>
-            What would you like to do?
-          </h3>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-          >
-            <button
-              style={{
-                padding: "12px 20px",
-                backgroundColor: "white",
-                border: "1px solid black",
-                cursor: "pointer",
-                fontFamily: "inherit",
-                fontSize: "16px",
-              }}
-            >
-              Upload Picture
-            </button>
-            <button
-              style={{
-                padding: "12px 20px",
-                backgroundColor: "white",
-                border: "1px solid black",
-                cursor: "pointer",
-                fontFamily: "inherit",
-                fontSize: "16px",
-              }}
-            >
-              Create Board
-            </button>
-          </div>
-        </div>
+        {renderModalContent()}
       </Modal>
     </div>
   );
