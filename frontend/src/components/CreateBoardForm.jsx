@@ -41,7 +41,7 @@ const CreateBoardForm = ({ onClose }) => {
           onChange={(e) => setDescription(e.target.value)}
           style={{
             width: "100%",
-            padding: "8px",
+            padding: "8px 8px 40px",
             marginBottom: "10px",
             border: "1px solid black",
             fontFamily: "inherit",
