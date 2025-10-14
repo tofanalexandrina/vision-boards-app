@@ -4,31 +4,31 @@ const UploadPictureForm = ({ onClose, boards }) => {
   //for storing url of uploaded image
   const [file, setFile] = useState(null);
   const [selectedBoard, setSelectedBoard] = useState("");
-  const [name, setName]=useState("");
-  const [description, setDescription]=useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleChange = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   };
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     //to complete with code for uploading image and saving data
-    console.log({file, name, description, selectedBoard});
+    console.log({ file, name, description, selectedBoard });
     onClose();
-  }
+  };
 
-  const handleDrop=(e)=>{
+  const handleDrop = (e) => {
     e.preventDefault();
-    if(e.dataTransfer.files && e.dataTransfer.files[0]){
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       //updating react state for later use
       setFile(e.dataTransfer.files[0]);
     }
-  }
+  };
 
-  const handleDragOver=(e)=>{
+  const handleDragOver = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <div
@@ -52,7 +52,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
           alignItems: "center",
           justifyContent: "center",
           marginBottom: "20px",
-          cursor: "pointer",
+          cursor: "pointer"
         }}
         onClick={() => document.getElementById("file-upload").click()}
       >
@@ -72,7 +72,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
           type="text"
           placeholder="Name"
           value={name}
-          onChange={(e)=>setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           style={{
             width: "100%",
             padding: "8px",
@@ -85,7 +85,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
         <input
           type="text"
           value={description}
-          onChange={(e)=>setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           style={{
             width: "100%",
             padding: "8px",
@@ -125,7 +125,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
             float: "right",
             marginBottom: "20px",
             cursor: "pointer",
-            fontFamily: "inherit",
+            fontFamily: "inherit"
           }}
         >
           Add
