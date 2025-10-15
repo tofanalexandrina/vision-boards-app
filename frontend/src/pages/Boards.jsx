@@ -41,7 +41,7 @@ const Boards = () => {
         return <CreateBoardForm onClose={handleClose}></CreateBoardForm>;
       default:
         return (
-          <div style={{ padding: "10px 50px", textAlign: "center" }}>
+          <div style={{ padding: "20px", textAlign: "center" }}>
             <h3 style={{ marginBottom: "20px", whiteSpace: "nowrap" }}>
               What would you like to do?
             </h3>
@@ -84,7 +84,7 @@ const Boards = () => {
     <div
       className="boards"
       style={{
-        padding: "20px",
+        padding: "10px 50px",
       }}
     >
       <div

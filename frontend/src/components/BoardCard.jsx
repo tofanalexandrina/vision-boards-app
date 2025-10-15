@@ -15,7 +15,7 @@ const BoardCard = ({board}) => {
       style={{
         backgroundColor: "white",
         border: "1px solid black",
-        padding: "30px",
+        padding: "20px",
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
