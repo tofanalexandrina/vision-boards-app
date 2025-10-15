@@ -1,6 +1,7 @@
 import SplashScreen from './components/SplashScreen.jsx';
 import Homepage from './pages/Homepage.jsx';
 import Boards from './pages/Boards.jsx';
+import SpecificBoard from './pages/SpecificBoard.jsx';
 import { useState, useEffect } from 'react';
 import Layout from './layout/Layout.jsx';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Homepage/>}/>
           <Route path="/boards" element={<Boards/>}/>
+          <Route path="/boards/:boardId" element={<SpecificBoard/>}/>
         </Route>
       </Routes>
     </Router>

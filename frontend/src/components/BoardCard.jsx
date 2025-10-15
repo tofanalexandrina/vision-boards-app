@@ -1,6 +1,14 @@
 import React from "react";
+//for clicking and going to specific board
+import {useNavigate}from "react-router-dom";
 
 const BoardCard = ({board}) => {
+  const navigate=useNavigate();
+
+  const handleClick=()=>{
+    navigate(`/boards/${board.boardId}`);
+  };
+
   return (
     <div
       key={board.boardId}
@@ -11,14 +19,16 @@ const BoardCard = ({board}) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
+        cursor: "pointer"
       }}
+      onClick={handleClick}
     >
       <div
         style={{
           width: "100px",
           height: "100px",
           backgroundColor: "#eee",
-          marginBottom: "10px",
+          marginBottom: "10px"
         }}
       ></div>
       <p style={{ margin: 0, fontWeight: "bold" }}>{board.boardName}</p>
