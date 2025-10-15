@@ -9,7 +9,7 @@ const Homepage = () => {
     <div
       className="homepage"
       style={{
-        padding: "20px",
+        padding: "10px 50px",
       }}
     >
       <div
@@ -17,8 +17,6 @@ const Homepage = () => {
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: "10px",
-          width: "90%",
-          maxWidth: "1200px",
           margin: "0 auto",
         }}
       >
