@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { mockPhotos } from "../data/mockPhotos.js";
 import { mockBoards } from "../data/mockBoards.js";
 import { mockBoardImage } from "../data/mockBoardImage.js";
 import PhotoCard from "../components/PhotoCard.jsx";
 
 const SpecificBoard = () => {
+  const navigate = useNavigate();
   const [board, setBoard] = useState(null);
   const [photos, setPhotos] = useState([]);
   const { boardId } = useParams();
+
+  const handleBack = () => {
+    navigate("/boards");
+  };
 
   //this effect runs whenever the value of boardId changes
   useEffect(() => {
@@ -38,6 +43,22 @@ const SpecificBoard = () => {
 
   return (
     <div style={{ padding: "10px 50px" }}>
+      <button
+        onClick={handleBack}
+        style={{
+          border: "1px solid black",
+          backgroundColor: "white",
+          padding: "5px 15px",
+          marginBottom: "15px",
+          fontFamily: "inherit",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        ← Back
+      </button>
       <div
         style={{
           backgroundColor: "white",
