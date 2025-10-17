@@ -1,9 +1,20 @@
 import React, { useState } from "react";
+import PhotoModal from "./PhotoModal.jsx";
 
 const PhotoCard = ({ photo }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
+    <>
     <div
       key={photo.id}
       style={{
@@ -19,6 +30,7 @@ const PhotoCard = ({ photo }) => {
       }}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onClick={openModal}
     >
       <img
         src={photo.imageUrl}
@@ -46,16 +58,20 @@ const PhotoCard = ({ photo }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
-          <h3 style={{ margin: "0 0 5px 0", color: "#000" }}>{photo.photoName}</h3>
+          <h3 style={{ margin: "0 0 5px 0", color: "#000" }}>
+            {photo.photoName}
+          </h3>
           <p style={{ margin: 0, fontSize: "14px", color: "#333" }}>
-            {photo.photoDescription || "No description"}
+            {photo.photoDescription || ""}
           </p>
         </div>
       )}
     </div>
+    <PhotoModal isOpen={isModalOpen} onClose={closeModal} photo={photo}/>
+    </>
   );
 };
 
