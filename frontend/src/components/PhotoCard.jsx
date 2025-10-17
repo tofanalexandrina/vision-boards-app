@@ -46,6 +46,7 @@ const PhotoCard = ({ photo }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
+            cursor: "pointer"
           }}
         >
           <h3 style={{ margin: "0 0 5px 0", color: "#000" }}>{photo.photoName}</h3>
