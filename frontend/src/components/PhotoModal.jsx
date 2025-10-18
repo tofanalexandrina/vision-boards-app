@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal.jsx";
-import {mockBoardImage} from "../data/mockBoardImage.js";
-import {mockBoards} from "../data/mockBoards.js";
+import { mockBoardImage } from "../data/mockBoardImage.js";
+import { mockBoards } from "../data/mockBoards.js";
 
 const PhotoModal = ({ isOpen, onClose, photo }) => {
-  const [boardName, setBoardName]=useState('');
+  const [boardName, setBoardName] = useState("");
 
-  useEffect(()=>{
-    if(photo){
-      const boardImageRelation=mockBoardImage.find(
-        (relation)=>relation.imageId===photo.photoId
+  useEffect(() => {
+    if (photo) {
+      const boardImageRelation = mockBoardImage.find(
+        (relation) => relation.imageId === photo.photoId
       );
 
-      if(boardImageRelation){
-        const board=mockBoards.find(
-        (board)=>board.boardId===boardImageRelation.boardId
+      if (boardImageRelation) {
+        const board = mockBoards.find(
+          (board) => board.boardId === boardImageRelation.boardId
         );
 
-        if(board){
+        if (board) {
           setBoardName(board.boardName);
         }
       }
@@ -38,7 +38,7 @@ const PhotoModal = ({ isOpen, onClose, photo }) => {
       >
         <div style={{ padding: "10px 20px" }}>
           <h3 style={{ margin: "5px 0", textAlign: "left", opacity: "50%" }}>
-            {boardName||""}
+            {boardName || ""}
           </h3>
         </div>
         <div
@@ -53,9 +53,9 @@ const PhotoModal = ({ isOpen, onClose, photo }) => {
             style={{
               width: "100%",
               height: "350px",
-              border: "1px solid black",
               marginBottom: "10px",
               overflow: "hidden",
+              border: "1px solid black"
             }}
           >
             <img
@@ -70,7 +70,6 @@ const PhotoModal = ({ isOpen, onClose, photo }) => {
           </div>
           <div
             style={{
-              border: "1px solid black",
               width: "100%",
               padding: "10px",
               textAlign: "center",
