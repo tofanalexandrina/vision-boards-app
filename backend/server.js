@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import BoardRoutes from './routes/BoardRoutes.js';
 
 
 dotenv.config();
@@ -12,6 +13,9 @@ app.use(cors({
 }
 ));
 app.use(express.json());
+
+//ROUTES
+app.use('/api/boards', boardRoutes);
 
 //basic routes
 app.get("/", (req, res)=>{
