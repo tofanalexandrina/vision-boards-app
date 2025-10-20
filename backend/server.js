@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import BoardRoutes from './routes/BoardRoutes.js';
+import boardRoutes from './routes/BoardRoutes.js';
 
 
 dotenv.config();
