@@ -41,6 +41,10 @@ const Boards = () => {
     setModalContent("create");
   };
 
+  const handleBoardCreated=(created)=>{
+    setBoards(prev=>[created, ...prev]);
+  }
+
   const renderModalContent = () => {
     switch (modalContent) {
       case "upload":
@@ -51,7 +55,7 @@ const Boards = () => {
           ></UploadPictureForm>
         );
       case "create":
-        return <CreateBoardForm onClose={handleClose}></CreateBoardForm>;
+        return <CreateBoardForm onClose={handleClose} onCreated={handleBoardCreated}/>;
       default:
         return (
           <div style={{ padding: "20px", textAlign: "center" }}>

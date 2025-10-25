@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import boardService from "../services/boardService.js";
 
-const CreateBoardForm = ({ onClose }) => {
+const CreateBoardForm = ({ onClose, onCreated }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ name, description });
-    onClose();
+    try {
+      const newBoard=await boardService.createBoard({
+        boardName: name,
+        boardDescription: description,
+        userId: 'u1'
+      });
+      onCreated?.(newBoard);
+      onClose();
+    } catch (error) {
+      console.error("Create board failed:", err);
+    }
   };
 
   return (
@@ -21,7 +31,7 @@ const CreateBoardForm = ({ onClose }) => {
       <h3 style={{ marginBottom: "20px", textAlign: "center" }}>
         Create Board
       </h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Name"
