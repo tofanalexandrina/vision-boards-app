@@ -9,13 +9,17 @@ const apiClient=axios.create({
         'Content-Type':'application/json'
     },
     //includes cookies for login sessions
-    withCredentials: true //for backend to recognise the logged-in user - session based auth
+    withCredentials: false //for backend to recognise the logged-in user - session based auth
 });
 
 //add token before each request if user is logged in
 apiClient.interceptors.request.use((config)=>{
     const token=localStorage.getItem('token');
-    if (token) config.headers.Authorization=`Bearer ${token}`;
+    if (token) {
+        config.headers.Authorization=`Bearer ${token}`;
+    }else{
+        delete config.headers.Authorization;
+    }
     return config;
 }, (error)=>{
     return Promise.reject(error);

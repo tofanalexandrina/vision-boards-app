@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import Modal from "../components/Modal";
-import { mockBoards } from "../data/mockBoards.js";
 import BoardCard from "../components/BoardCard.jsx";
 import UploadPictureForm from "../components/UploadPictureForm.jsx";
 import CreateBoardForm from "../components/CreateBoardForm.jsx";
+import { useEffect } from "react";
+import boardService from "../services/boardService.js";
 
 const Boards = () => {
   const [open, setOpen] = useState(false);
-  const [boards, setBoards] = useState(mockBoards);
+  const [boards, setBoards] = useState([]);
   const [modalContent, setModalContent] = useState("menu");
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      try {
+        const data = await boardService.getAllBoards();
+        setBoards(data);
+      } catch (error) {
+        console.error("Failed to fetch boards:", error);
+      }
+    };
+    fetchBoards();
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -97,9 +110,13 @@ const Boards = () => {
           margin: "0 auto",
         }}
       >
-        {boards.map((board) => (
-          <BoardCard key={board.boardId} board={board}></BoardCard>
-        ))}
+        {boards.length === 0 ? (
+          <div>No boards yet. Click + to create one.</div>
+        ) : (
+          boards.map((board) => (
+            <BoardCard key={board.boardId} board={board}></BoardCard>
+          ))
+        )}
       </div>
       <button
         style={{

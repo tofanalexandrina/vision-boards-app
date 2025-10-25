@@ -31,4 +31,3 @@ mongoose.connect(process.env.MONGO_URI).then(()=>{
     });
 }).catch((err)=>console.error("MongoDB connection error:", err));
 
-

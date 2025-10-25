@@ -1,4 +1,4 @@
-import apiClient from "./baseApi";
+import apiClient from "./baseApi.js";
 
 export const boardService={
     getAllBoards: ()=> apiClient.get('/boards'),
