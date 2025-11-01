@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import photoService from "../services/photoService.js";
 
 const UploadPictureForm = ({ onClose, boards }) => {
   //for storing url of uploaded image
@@ -6,16 +7,31 @@ const UploadPictureForm = ({ onClose, boards }) => {
   const [selectedBoard, setSelectedBoard] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [selectedBoard, setSelectedBoard] = useState("");
 
-  const handleChange = () => {
-    setFile(URL.createObjectURL(e.target.files[0]));
+  const handleFileChange = () => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(URL.createObjectURL(e.target.files[0])); //store file object
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //to complete with code for uploading image and saving data
-    console.log({ file, name, description, selectedBoard });
-    onClose();
+    if (!file || !selectedBoard) {
+      alert("Please select a file and a board");
+      return;
+    }
+    try {
+      const uploadedImage = await photoService.upload(file, {
+        imageName: name,
+        imageDescription: description,
+        boardId: selectedBoard,
+      });
+      onUploaded?.(uploadedImage);
+      onClose();
+    } catch (error) {
+      alert("Upload failed: " + error.message);
+    }
   };
 
   const handleDrop = (e) => {
@@ -52,7 +68,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
           alignItems: "center",
           justifyContent: "center",
           marginBottom: "20px",
-          cursor: "pointer"
+          cursor: "pointer",
         }}
         onClick={() => document.getElementById("file-upload").click()}
       >
@@ -62,7 +78,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
           style={{ display: "none" }}
           type="file"
           id="file-upload"
-          onChange={handleChange}
+          onChange={handleFileChange}
           accept="image/*"
           required
         />
@@ -78,7 +94,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
             padding: "8px",
             marginBottom: "10px",
             border: "1px solid black",
-            fontFamily: "inherit"
+            fontFamily: "inherit",
           }}
           required
         />
@@ -91,7 +107,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
             padding: "8px 8px 40px",
             marginBottom: "10px",
             border: "1px solid black",
-            fontFamily: "inherit"
+            fontFamily: "inherit",
           }}
           placeholder="Description (Optional)"
         />
@@ -103,7 +119,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
             padding: "8px",
             marginBottom: "10px",
             border: "1px solid black",
-            fontFamily: "inherit"
+            fontFamily: "inherit",
           }}
         >
           <option value="" disabled>
@@ -125,7 +141,7 @@ const UploadPictureForm = ({ onClose, boards }) => {
             float: "right",
             marginBottom: "20px",
             cursor: "pointer",
-            fontFamily: "inherit"
+            fontFamily: "inherit",
           }}
         >
           Add

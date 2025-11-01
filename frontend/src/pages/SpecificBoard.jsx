@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { mockPhotos } from "../data/mockPhotos.js";
-import { mockBoards } from "../data/mockBoards.js";
-import { mockBoardImage } from "../data/mockBoardImage.js";
 import PhotoCard from "../components/PhotoCard.jsx";
+import boardService from "../services/boardService.js";
+import photoService from "../services/photoService.js";
 
 const SpecificBoard = () => {
   const navigate = useNavigate();
