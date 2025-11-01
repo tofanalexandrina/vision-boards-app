@@ -12,6 +12,7 @@ const dirname=path.dirname(filename);
 //where to store uploaded files
 const uploadDir=path.join(dirname, '..', "uploads"); //backend->uploads
 
+//files are saved to disk (server)
 const storage=multer.diskStorage({
     //where to save file
     destination: (_req, _file, cb)=>{

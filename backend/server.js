@@ -3,6 +3,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import boardRoutes from './routes/BoardRoutes.js';
+import path from "path";
+import {fileURLToPath} from "url";
+import imageRoutes from './routes/ImageRoutes';
 
 
 dotenv.config();
@@ -14,8 +17,14 @@ app.use(cors({
 ));
 app.use(express.json());
 
+const filename=fileURLToPath(import.meta.url);
+const dirname=path.dirname(filename);
+
+app.use('/uploads', express.static(path.join(dirname, 'uploads')));
+
 //ROUTES
 app.use('/api/boards', boardRoutes);
+app.use('/api/images', imageRoutes);
 
 //basic routes
 app.get("/", (req, res)=>{
@@ -24,8 +33,10 @@ app.get("/", (req, res)=>{
 
 const PORT=process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI).then(()=>{
-    console.log("Connected to MongoDB");
+mongoose.connect(process.env.MONGO_URI, {
+    dbName: process.env.MONGO_DB || 'envision'
+}).then(()=>{
+    console.log(`Connected to MongoDB (db=${mongoose.connection.name})`);
     app.listen(PORT, ()=>{
         console.log(`Server is running on port ${PORT}`);
     });
